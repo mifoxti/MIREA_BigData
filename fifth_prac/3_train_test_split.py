@@ -3,19 +3,16 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-# Загрузка обработанных данных
 df = pd.read_csv('processed_steam_data.csv')
 
-# Разделение на признаки и целевую переменную
 X = df.drop('popular', axis=1)
 y = df['popular']
 
-# Разделение на тренировочную и тестовую выборки
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2,
     random_state=42,
-    stratify=y  # Стратификация для сохранения баланса классов
+    stratify=y
 )
 
 print("РАЗДЕЛЕНИЕ ДАННЫХ НА ВЫБОРКИ")
@@ -29,7 +26,6 @@ print(y_train.value_counts(normalize=True))
 print(f"\nБаланс классов в тестовой выборке:")
 print(y_test.value_counts(normalize=True))
 
-# Сохранение разделенных данных
 train_data = pd.DataFrame(X_train)
 train_data['popular'] = y_train.values
 test_data = pd.DataFrame(X_test)
